@@ -1,4 +1,4 @@
 # Abbreviations Of Files 
 Homework_W1/2/3/4_1/2/3/4                                                                                                                          
-☝️ File Name    ☝️Week    ☝️ Exercise Number
+☝️ Name  |  ☝️Week  |  ☝️ Exercise Number
                                                                                                                                            

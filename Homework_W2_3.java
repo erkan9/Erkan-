@@ -39,7 +39,6 @@ public class Homework_W2_3 {
                 floors--;
             case 0:
                 System.out.println("Ауч");
-                floors--;
         }
     }
 }

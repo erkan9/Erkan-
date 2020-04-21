@@ -8,33 +8,34 @@ public class Homework_W2_3 {
 
         switch(floors) {
             case 9:
-                floors--;
+                //floors--;
             case 8:
                 System.out.println("Ани");
-                floors--;
+               // floors--;
             case 7:
                 System.out.println("Пепи");
-                floors--;
+               //floors--;
             case 6:
                 System.out.println("Ваня");
-                floors--;
+                //floors--;
             case 5:
                 System.out.println("Васи");
-                floors--;
+                //floors--;
             case 4:
                 System.out.println("Деси");
-                floors--;
+                //floors--;
             case 3:
                 System.out.println("Дими");
-                floors--;
+                //floors--;
             case 2:
                 System.out.println("Димитър");
-                floors--;
+                //floors--;
             case 1:
                 System.out.println("Георги");
-                floors--;
+                //floors--;
             case 0:
                 System.out.println("Ауч");
+                break;
         }
     }
 }

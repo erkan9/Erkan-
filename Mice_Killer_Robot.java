@@ -9,7 +9,7 @@ public class Mice_Killer_Robot {
         int robotsFullBatteryInPercent = 100;
 
         for (int hitCounter = 1; hitCounter <= hitCapacityOfRobot; hitCounter++) {
-            robotsFullBatteryInPercent = robotsFullBatteryInPercent - 25;
+            robotsFullBatteryInPercent -= 25;
             
             // 1.Navigation of the Killer Robot / killerRobotMovement()
             System.out.println("What is this in front of the Killer Robot ?");

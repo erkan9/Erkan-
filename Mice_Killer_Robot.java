@@ -7,10 +7,12 @@ public class Mice_Killer_Robot {
 
         Scanner scanner = new Scanner(System.in);
 
-        int hitCapacityOfRobot = 4;
+        final int hitCapacityOfRobot = 4;
+        int robotsFullBatteryInPercent = 100;
 
         for (int hitCounter = 1; hitCounter <= hitCapacityOfRobot; hitCounter++) {
-
+            robotsFullBatteryInPercent = robotsFullBatteryInPercent - 25;
+            
             // 1.Navigation of the Killer Robot / killerRobotMovement()
             System.out.println("What is this in front of the Killer Robot ?");
             String objectInFrontOfRobot = scanner.nextLine();
@@ -18,9 +20,9 @@ public class Mice_Killer_Robot {
             String robotsMovementAfterSpot = killerRobotMovement(objectInFrontOfRobot);
 
             System.out.printf("Movement of the Robot -> %s\n", robotsMovementAfterSpot);
-
+            
             // 2.Is the mouse in front of the Killer Robot
-            System.out.println("Number of the Pixels around the Killer Robot");
+            System.out.println("Give the number of the Pixels around the Killer Robot");
 
             for (int isTheMouseInFrontOfRobot = 0; isTheMouseInFrontOfRobot < 1; ) {
 
@@ -30,10 +32,9 @@ public class Mice_Killer_Robot {
                     isTheMouseInFrontOfRobot++;
                     System.out.println("Mouse is in front of the Killer Robot!");
                 } else {
-                    System.out.println("Number of the Pixels around the Killer Robot again");
+                    System.out.println("Give Number of the Pixels around the Killer Robot again");
                 }
             }
-
             // 2.To what Killer Robot did damage ? / isDamageDoneToMouse()
             System.out.printf("%15s %d", "Hit №", hitCounter);
             boolean isDamageDoneToMouse = isDamageDoneToMouse();
@@ -45,13 +46,15 @@ public class Mice_Killer_Robot {
                 System.out.println("Damage done to the furniture");
                 System.out.println("Keep looking for another mouse");
             }
+            
+            System.out.printf("Battery Left: %d%%\n", robotsFullBatteryInPercent);
 
             // 4. Communication with the owner / timeToCommunicateWithOwner()
             if (hitCounter % 2 != 0) {
                 timeToCommunicateWithOwner();
             }
         }
-
+        
         //3.Is the Killer Robot charging himself ? / isElectricityOn
         System.out.println("*Killer Robot needs to get recharged*");
 
@@ -65,7 +68,7 @@ public class Mice_Killer_Robot {
     }
 
     public static String killerRobotMovement(String objectInFrontOfRobot) {
-        String robotsMovementAfterSpot = "";
+        String robotsMovementAfterSpot;
 
         if (objectInFrontOfRobot.equalsIgnoreCase("Wall")) {
             robotsMovementAfterSpot = "Go Sideway";

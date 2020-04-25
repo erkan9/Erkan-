@@ -2,9 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Mice_Killer_Robot {
-
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
 
         final int hitCapacityOfRobot = 4;
@@ -15,8 +13,8 @@ public class Mice_Killer_Robot {
             
             // 1.Navigation of the Killer Robot / killerRobotMovement()
             System.out.println("What is this in front of the Killer Robot ?");
+            
             String objectInFrontOfRobot = scanner.nextLine();
-
             String robotsMovementAfterSpot = killerRobotMovement(objectInFrontOfRobot);
 
             System.out.printf("Movement of the Robot -> %s\n", robotsMovementAfterSpot);
@@ -25,9 +23,8 @@ public class Mice_Killer_Robot {
             System.out.println("Give the number of the Pixels around the Killer Robot");
 
             for (int isTheMouseInFrontOfRobot = 0; isTheMouseInFrontOfRobot < 1; ) {
-
                 int numberOfPixelsAround = Integer.parseInt(scanner.nextLine());
-
+                
                 if (numberOfPixelsAround % 2 == 0) {
                     isTheMouseInFrontOfRobot++;
                     System.out.println("Mouse is in front of the Killer Robot!");
@@ -35,8 +32,10 @@ public class Mice_Killer_Robot {
                     System.out.println("Give Number of the Pixels around the Killer Robot again");
                 }
             }
+            
             // 2.To what Killer Robot did damage ? / isDamageDoneToMouse()
             System.out.printf("%15s %d", "Hit №", hitCounter);
+            
             boolean isDamageDoneToMouse = isDamageDoneToMouse();
 
             if (isDamageDoneToMouse) {
@@ -93,7 +92,7 @@ public class Mice_Killer_Robot {
         return isDamageDoneToMouse;
     }
     public static void timeToCommunicateWithOwner() {
-
+        
         System.out.println("*Killer Robot goes to communicate with its owner*");
 
         for (int robotCountingNums = 10; robotCountingNums >= 1; robotCountingNums--) {

@@ -47,9 +47,9 @@ public class chessForPonies {
         final byte OFFSET_FOR_2D_ARRAY = 1;
         int maxTurns = Integer.MAX_VALUE;
 
-        byte whitePlayerTurnsCounter = 0;
-        byte blackPlayerTurnsCounter = 0;
-        int  playerIdAndTurnGiver    = 1;
+        int whitePlayerTurnsCounter = 0;
+        int blackPlayerTurnsCounter = 0;
+        int playerIdAndTurnGiver    = 1;
 
         String currentPlayer = "";
 
@@ -62,7 +62,8 @@ public class chessForPonies {
                 {"bDw", "bM",  "bK",  "bQ",  "bD",  "bDw"}        //line 5
         };//column 1      2     3       4      5      6
 
-
+        System.out.println("NOTE: You have to enter your figures' positions with numbers");
+        
         while (!isGameOver) {
 
             System.out.println(Arrays.deepToString(poniesChessBoard)
@@ -163,10 +164,10 @@ public class chessForPonies {
                                    (Math.abs(figuresPositionCol  - figuresPlacementCol)   == 0) ;
                 isQueenMoveable  = (Math.abs(figuresPositionPow  - figuresPlacementPow)   == 1) &&
                                    (Math.abs(figuresPositionCol  - figuresPlacementCol)   == 1);
-                isDwarfMoveable  = Math.abs(figuresPlacementPow - figuresPositionPow)     == 1  &&
+                isDwarfMoveable  = Math.abs(figuresPlacementPow  - figuresPositionPow)    == 1  &&
                                    isDwarfMovingForward;
                 isDonkeyMoveable =(Math.abs(figuresPlacementPow  - figuresPositionPow)    == 2) ||
-                                  (Math.abs(figuresPlacementPow   - figuresPlacementCol)  == 2);
+                                  (Math.abs(figuresPlacementPow  - figuresPlacementCol)   == 2);
                 isKingMoveable   = isMortarMoveable || isQueenMoveable;
 
                 if (poniesChessBoard[figuresPlacementPow][figuresPlacementCol].equals(kingToKill)) {

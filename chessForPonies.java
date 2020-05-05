@@ -10,6 +10,7 @@ public class chessForPonies {
         boolean isMortarMoveable;
         boolean isQueenMoveable;
         boolean isDwarfMoveable;
+        boolean isDwarfMovingForward;
         boolean isKingMoveable;
         boolean isDonkeyMoveable;
 
@@ -139,6 +140,8 @@ public class chessForPonies {
                             poniesChessBoard[figuresPlacementPow][figuresPlacementCol].equals("wK") ||
                             poniesChessBoard[figuresPlacementPow][figuresPlacementCol].equals("wM") ||
                             poniesChessBoard[figuresPlacementPow][figuresPlacementCol].equals("wK");
+                
+                isDwarfMovingForward = figuresPositionCol + 1 == figuresPlacementPow;
 
                 if (playerIdAndTurnGiver % 2 != 0) {
                     
@@ -149,7 +152,9 @@ public class chessForPonies {
                             poniesChessBoard[figuresPlacementPow][figuresPlacementCol].equals("bK") ||
                             poniesChessBoard[figuresPlacementPow][figuresPlacementCol].equals("bM") ||
                             poniesChessBoard[figuresPlacementPow][figuresPlacementCol].equals("bK");
-                }
+                    
+                    isDwarfMovingForward = figuresPositionPow - 1 == figuresPlacementPow;
+             }
 
                 // Calculations if one figure is moveable
                 isMortarMoveable = (Math.abs(figuresPlacementPow - figuresPositionPow)    == 0) &&
@@ -158,8 +163,8 @@ public class chessForPonies {
                                    (Math.abs(figuresPositionCol  - figuresPlacementCol)   == 0) ;
                 isQueenMoveable  = (Math.abs(figuresPositionPow  - figuresPlacementPow)   == 1) &&
                                    (Math.abs(figuresPositionCol  - figuresPlacementCol)   == 1);
-                isDwarfMoveable  = figuresPositionPow - 1 == figuresPlacementPow ||
-                                   figuresPowPosition + 1 == figuresPlacementPow;
+                isDwarfMoveable  = Math.abs(figuresPlacementPow - figuresPositionPow)     == 1  &&
+                                   isDwarfMovingForward;
                 isDonkeyMoveable =(Math.abs(figuresPlacementPow  - figuresPositionPow)    == 2) ||
                                   (Math.abs(figuresPlacementPow   - figuresPlacementCol)  == 2);
                 isKingMoveable   = isMortarMoveable || isQueenMoveable;

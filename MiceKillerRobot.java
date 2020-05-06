@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Mice_Killer_Robot {
+public class MiceKillerRobot {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

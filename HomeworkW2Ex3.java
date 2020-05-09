@@ -1,6 +1,6 @@
-package Homework_W2;
+package HomeworkW2;
 
-public class Homework_W2_3 {
+public class HomeworkW23 {
 
     public static void main(String[] args) {
         

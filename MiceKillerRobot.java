@@ -1,123 +1,148 @@
 import java.util.Random;
 import java.util.Scanner;
 
+/***
+ *
+ * @author Erkan Kamber
+ */
+
 public class MiceKillerRobot {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        final int hitCapacityOfRobot = 4;
-        int robotsFullBatteryInPercent = 100;
+        final byte HIT_CAPACITY_OF_ROBOT = 4;
+        byte robotsFullBatteryInPercent = 100;
 
-        for (int hitCounter = 1; hitCounter <= hitCapacityOfRobot; hitCounter++) {
-            robotsFullBatteryInPercent -= 25;
-            
-            // 1.Navigation of the Killer Robot / killerRobotMovement()
-            System.out.println("What is this in front of the Killer Robot ?");
-            
-            String objectInFrontOfRobot = scanner.nextLine();
-            String robotsMovementAfterSpot = killerRobotMovement(objectInFrontOfRobot);
+        String turnOffRobot = "No";
 
-            System.out.printf("Movement of the Robot -> %s\n", robotsMovementAfterSpot);
-            
-            // 2.Is the mouse in front of the Killer Robot
-            System.out.println("Give the number of the Pixels around the Killer Robot");
+        while (!turnOffRobot.equalsIgnoreCase("Yes")) {
 
-            for (int isTheMouseInFrontOfRobot = 0; isTheMouseInFrontOfRobot < 1; ) {
-                int numberOfPixelsAround = Integer.parseInt(scanner.nextLine());
-                
-                if (numberOfPixelsAround % 2 == 0) {
-                    isTheMouseInFrontOfRobot++;
-                    System.out.println("Mouse is in front of the Killer Robot!");
-                } else {
-                    System.out.println("Give Number of the Pixels around the Killer Robot again");
+            for (byte hitCounter = 1; hitCounter <= HIT_CAPACITY_OF_ROBOT; hitCounter++) {
+                robotsFullBatteryInPercent -= 25;
+
+                // Navigation of the Killer Robot
+
+                String robotsMovementAfterSpot = killerRobotMovement();
+                System.out.printf("Movement of the Robot -> %s\n", robotsMovementAfterSpot);
+
+                // Is the mouse in front of the Killer Robot ?
+                isTheMouseInFront();
+
+                // To what Killer Robot did damage ?
+                System.out.printf("%15s %d", "Hit №", hitCounter);
+                isDamageDoneToMouse();
+
+                // Communication with the owner
+                timeToCommunicateWithOwner();
+
+                System.out.printf("Battery Left: %d%%\n", robotsFullBatteryInPercent);
+
+                if (robotsFullBatteryInPercent == 0) {
+                    // Is the Killer Robot charging himself ?
+                    isTimeToRecharge();
+
+                    //Turn off the Robot ?
+                    turnOffRobot = isTimeToTurnOffRobot();
                 }
             }
-            
-            // 2.To what Killer Robot did damage ? / isDamageDoneToMouse()
-            System.out.printf("%15s %d", "Hit №", hitCounter);
-            
-            boolean isDamageDoneToMouse = isDamageDoneToMouse();
-
-            if (isDamageDoneToMouse) {
-                System.out.println("\nDamage done to the mouse");
-                System.out.println("Keep looking for more mice\n");
-            } else {
-                System.out.println("Damage done to the furniture");
-                System.out.println("Keep looking for another mouse");
-            }
-            
-            System.out.printf("Battery Left: %d%%\n", robotsFullBatteryInPercent);
-
-            // 4. Communication with the owner / timeToCommunicateWithOwner()
-            if (hitCounter % 2 != 0) {
-                timeToCommunicateWithOwner();
-            }
         }
-        
-        //3.Is the Killer Robot charging himself ? / isElectricityOn
-        System.out.println("*Killer Robot needs to get recharged*");
-
-        boolean isThereElectricity = isElectricityOn();
-
-        if (isThereElectricity) {
-            System.out.println("There is Electricity");
-        } else {
-            System.out.println("There is no Electricity");
-        }
+        System.out.println("The Robot is turned off");
     }
 
-    public static String killerRobotMovement(String objectInFrontOfRobot) {
-        String robotsMovementAfterSpot;
+
+    public static String killerRobotMovement() {
+        Scanner objectInFront = new Scanner(System.in);
+
+        System.out.println("What is this in front of the Killer Robot ?");
+
+        String objectInFrontOfRobot = objectInFront.nextLine();
+        String robotsMovementAfterSpot = "Somehow the object is passed";
 
         if (objectInFrontOfRobot.equalsIgnoreCase("Wall")) {
-            robotsMovementAfterSpot = "Go Sideway";
+            robotsMovementAfterSpot = "Go Sideways";
         } else if (objectInFrontOfRobot.equalsIgnoreCase("Chair")) {
             robotsMovementAfterSpot = "Jump";
         } else if (objectInFrontOfRobot.equalsIgnoreCase("Nothing")) {
             robotsMovementAfterSpot = "Forward";
-        } else {
-            robotsMovementAfterSpot = "Somehow the object is passed";
         }
         return robotsMovementAfterSpot;
     }
-    public static boolean isDamageDoneToMouse() {
-        boolean isDamageDoneToMouse = true;
+
+    public static void isTheMouseInFront() {
+        Scanner isTheMouseInFront = new Scanner(System.in);
+
+        System.out.println("Give the number of the Pixels around the Killer Robot");
+
+        for (; ; ) {
+
+            int numberOfPixelsAround = Integer.parseInt(isTheMouseInFront.nextLine());
+
+            if (numberOfPixelsAround % 2 == 0) {
+                System.out.println("Mouse is in front of the Killer Robot!");
+                break;
+            }
+            System.out.println("Give Number of the Pixels around the Killer Robot again");
+        }
+    }
+
+    public static void isDamageDoneToMouse() {
 
         Random numGeneratorForHits = new Random();
         int randomGeneratedNum = numGeneratorForHits.nextInt(10) + 1;
 
         if (randomGeneratedNum == 5) {
-            isDamageDoneToMouse = false;
+            System.out.println("\nDamage done to the furniture");
+            System.out.println("Keep looking for another mouse");
+        } else {
+            System.out.println("\nDamage done to the mouse");
+            System.out.println("Keep looking for more mice");
         }
-        return isDamageDoneToMouse;
     }
-    public static void timeToCommunicateWithOwner() {
-        
-        System.out.println("*Killer Robot goes to communicate with its owner*");
 
-        for (int robotCountingNums = 10; robotCountingNums >= 1; robotCountingNums--) {
-            if (robotCountingNums % 2 == 0) {
-                System.out.printf("I am a Robottttt %s\n", robotCountingNums);
+    public static void timeToCommunicateWithOwner() {
+
+        Random numGenerator = new Random();
+        int randomGeneratedNum = numGenerator.nextInt(3) + 1;
+
+        if (randomGeneratedNum % 2 != 0) {
+
+            System.out.println("*Killer Robot goes to communicate with its owner*");
+
+            for (byte robotCountingNums = 10; robotCountingNums >= 1; robotCountingNums--) {
+
+                if (robotCountingNums % 2 == 0) {
+                    System.out.printf("I am a Robottttt %s\n", robotCountingNums);
+                }
             }
         }
     }
-    public static boolean isElectricityOn() {
-        boolean isElectricityOn = false;
 
-        for (int checker = 0; checker < 1; ) {
+    public static void isTimeToRecharge() {
+
+        System.out.println("It is time to recharge the robot");
+        for (byte checker = 0; checker < 1; ) {
 
             Random numberGeneratorForCharging = new Random();
             int randomlyGeneratedFirstNum = numberGeneratorForCharging.nextInt(1000) + 1;
             int randomlyGeneratedSecondNum = numberGeneratorForCharging.nextInt(1000) + 1;
 
             if (randomlyGeneratedFirstNum > randomlyGeneratedSecondNum) {
-                isElectricityOn = true;
+                System.out.println("There is Electricity");
                 checker++;
             } else if (randomlyGeneratedSecondNum > randomlyGeneratedFirstNum) {
-                isElectricityOn = false;
+                System.out.println("There is no Electricity");
                 checker++;
             }
         }
-        return isElectricityOn;
+    }
+
+    public static String isTimeToTurnOffRobot() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Do you want to turn off the Robot\nYes or No");
+        String turnOff = scanner.nextLine();
+
+        return turnOff;
     }
 }

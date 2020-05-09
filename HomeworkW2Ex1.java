@@ -1,27 +1,26 @@
-package Homework_W2;
+package HomeworkW2;
 
-public class Homework_W2_1 {
+public class HomeworkW2Ex1 {
 
     public static void main(String[] args) {
 
-       Perimeter();
-       Area();
-        
+        int sideAofRectangle = 2;
+        int sideBofRectangle = 6;
+
+        perimeterOfRectangle(sideAofRectangle, sideBofRectangle);
+        areaOfRectangle(sideAofRectangle, sideBofRectangle);
+
     }
-    public static void Perimeter() {
-        int sideA = 2; 
-        int sideB = 6;
-        
-        int P = 2 * sideA + 2 * sideB;
-        
-        System.out.println("The Perimeter of the rectangle is : " + P);
+    public static void perimeterOfRectangle(int sideA, int sideB) {
+
+        int perimeter = 2 * sideA + 2 * sideB;
+
+        System.out.printf("The Perimeter of the rectangle is: %d\n",perimeter);
     }
-    public static void Area() {
-        int sideA = 2; 
-        int sideB = 6;
-        
+    public static void areaOfRectangle(int sideA, int sideB) {
+
         int area = sideA * sideB;
-        
-        System.out.println("The area of the rectangle is : " + area);
+
+        System.out.printf("The area of the rectangle is: %d", area);
     }
 }

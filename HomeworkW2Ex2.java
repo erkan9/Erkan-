@@ -1,7 +1,7 @@
-package Homework_W2;
+package HomeworkW2;
 import java.util.Scanner;
 
-public class Homework_W2_2 {
+public class HomeworkW2Ex2 {
 
     public static void main(String[] args) {
         

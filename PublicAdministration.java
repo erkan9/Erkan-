@@ -1,6 +1,10 @@
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * @author Erkan Kamber
+ */
+
 public class PublicAdministration {
 
     public static void main(String[] args) {
@@ -174,7 +178,7 @@ public class PublicAdministration {
         if (isNumFound) {
             System.out.printf("Числото %d е в %d позиция", findPositionOfThisNum, positionOfSearchedNum);
         } else {
-            System.out.printf("Числото %d  не е намерено", findPositionOfThisNum);
+            System.out.printf("Числото %d не е намерено", findPositionOfThisNum);
         }
     }
 

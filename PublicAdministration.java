@@ -12,16 +12,16 @@ public class PublicAdministration {
 
         System.out.println("Колко числа ще въведете ?");
         int arraySize = Integer.parseInt(scanner.nextLine());
-
-        if(arraySize > 0) {
-
-            int[] mainArray = new int[arraySize];
+        
+         int[] mainArray = new int[arraySize];
 
             int chosenOption;
             int takenNumCounter = 1;
 
             boolean willYouUseProgram = true;
 
+        if(arraySize > 0) {
+            
             System.out.println("Числата трябва да са между 0 и 100");
 
             for (int i = 0; i < arraySize; ) {
@@ -92,7 +92,7 @@ public class PublicAdministration {
             }
             System.out.println("Вие затворихте програмата");
         } else {
-            System.out.println("Не може да въведете отрицателно число или числото 0");
+            System.out.printf("Броят на числата не може да бъде %d", arraySize);
         }
     }
 

@@ -271,6 +271,9 @@ public class PublicAdministration {
             for (int i = 0; i < arraySize; i++) {
                 if (mainArray[i] == mainArray[--arraySize]) {
                     isArraySimetric = true;
+                }else {
+                    isArraySimetric = false;
+                    break;
                 }
             }
         }

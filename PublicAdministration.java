@@ -161,7 +161,7 @@ public class PublicAdministration {
 
             if (findPositionOfThisNum == mainArray[middleNumOfArray]) {
 
-                positionOfSearchedNum = mainArray[middleNumOfArray];
+                positionOfSearchedNum = middleNumOfArray;
 
                 isNumFound = true;
                 break;

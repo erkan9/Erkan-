@@ -13,82 +13,87 @@ public class PublicAdministration {
         System.out.println("Колко числа ще въведете ?");
         int arraySize = Integer.parseInt(scanner.nextLine());
 
-        int[] mainArray = new int[arraySize];
+        if(arraySize > 0) {
 
-        int chosenOption;
-        int takenNumCounter = 1;
+            int[] mainArray = new int[arraySize];
 
-        boolean willYouUseProgram = true;
+            int chosenOption;
+            int takenNumCounter = 1;
 
-        System.out.println("Числата трябва да са между 0 и 100");
+            boolean willYouUseProgram = true;
 
-        for (int i = 0; i < arraySize; ) {
+            System.out.println("Числата трябва да са между 0 и 100");
 
-            System.out.printf("Въведете число номер: %d\n", takenNumCounter);
+            for (int i = 0; i < arraySize; ) {
 
-            mainArray[i] = Integer.parseInt(scanner.nextLine());
+                System.out.printf("Въведете число номер: %d\n", takenNumCounter);
 
-            if (mainArray[i] > 0 && mainArray[i] < 100) {
-                i++;
-                takenNumCounter++;
-            } else {
-                System.out.println("Числото НЕ е между 0 и 100");
+                mainArray[i] = Integer.parseInt(scanner.nextLine());
+
+                if (mainArray[i] > 0 && mainArray[i] < 100) {
+                    i++;
+                    takenNumCounter++;
+                } else {
+                    System.out.println("Числото НЕ е между 0 и 100");
+                }
             }
+
+            optionDisplayer();
+
+            chosenOption = chosenOption();
+
+            while (willYouUseProgram) {
+
+                if (chosenOption == 1) {
+
+                    ascendingAndDescendingSort(arraySize, mainArray, chosenOption);
+                } else if (chosenOption == 2) {
+
+                    ascendingAndDescendingSort(arraySize, mainArray, chosenOption);
+                } else if (chosenOption == 3) {
+
+                    findThePositionOfNum(arraySize, mainArray);
+                } else if (chosenOption == 4) {
+
+                    arrayScramble(arraySize, mainArray);
+                } else if (chosenOption == 5) {
+
+                    sumAndAverageCalculator(arraySize, mainArray, chosenOption);
+                } else if (chosenOption == 6) {
+
+                    smallestAndBiggestNumFinder(arraySize, mainArray, chosenOption);
+                } else if (chosenOption == 7) {
+
+                    smallestAndBiggestNumFinder(arraySize, mainArray, chosenOption);
+                } else if (chosenOption == 8) {
+
+                    sumAndAverageCalculator(arraySize, mainArray, chosenOption);
+                } else if (chosenOption == 9) {
+
+                    isArraySymmetrical(arraySize, mainArray);
+                } else if (chosenOption == 10) {
+
+                    reversingArray(arraySize, mainArray);
+                } else if (chosenOption == 11) {
+
+                    displayEnteredNums(arraySize, mainArray);
+                } else if (chosenOption == 12) {
+                    break;
+                }
+
+                willYouUseProgram = willYouWorkMore(willYouUseProgram);
+
+                if (willYouUseProgram) {
+
+                    optionDisplayer();
+
+                    chosenOption = chosenOption();
+                }
+            }
+            System.out.println("Вие затворихте програмата");
+        } else {
+            System.out.println("Не може да въведете отрицателно число или числото 0");
         }
-
-        optionDisplayer();
-
-        chosenOption = chosenOption();
-
-        while (willYouUseProgram) {
-
-            if (chosenOption == 1) {
-
-                ascendingAndDescendingSort(arraySize, mainArray, chosenOption);
-            } else if (chosenOption == 2) {
-
-                ascendingAndDescendingSort(arraySize, mainArray, chosenOption);
-            } else if (chosenOption == 3) {
-
-                findThePositionOfNum(arraySize, mainArray);
-            } else if (chosenOption == 4) {
-
-                arrayScramble(arraySize, mainArray);
-            } else if (chosenOption == 5) {
-
-                sumAndAverageCalculator(arraySize, mainArray, chosenOption);
-            } else if (chosenOption == 6) {
-
-                smallestAndBiggestNumFinder(arraySize, mainArray, chosenOption);
-            } else if (chosenOption == 7) {
-
-                smallestAndBiggestNumFinder(arraySize, mainArray, chosenOption);
-            } else if (chosenOption == 8) {
-
-                sumAndAverageCalculator(arraySize, mainArray, chosenOption);
-            } else if (chosenOption == 9) {
-
-                isArraySymmetrical(arraySize, mainArray);
-            } else if (chosenOption == 10) {
-
-                reversingArray(arraySize, mainArray);
-            } else if (chosenOption == 11) {
-
-                displayEnteredNums(arraySize, mainArray);
-            } else if (chosenOption == 12) {
-                break;
-            }
-
-            willYouUseProgram = willYouWorkMore(willYouUseProgram);
-
-            if (willYouUseProgram) {
-
-                optionDisplayer();
-
-                chosenOption = chosenOption();
-            }
-        }
-        System.out.println("Вие затворихте програмата");
     }
 
     /**

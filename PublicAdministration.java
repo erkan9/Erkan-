@@ -176,7 +176,7 @@ public class PublicAdministration {
             middleNumOfArray = (firstNumOfArray + lastNumOfArray) / 2;
         }
         if (isNumFound) {
-            System.out.printf("Числото %d е в %d позиция", findPositionOfThisNum, positionOfSearchedNum);
+            System.out.printf("Числото %d е в %d позиция", findPositionOfThisNum, ++positionOfSearchedNum);
         } else {
             System.out.printf("Числото %d не е намерено", findPositionOfThisNum);
         }

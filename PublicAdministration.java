@@ -2,6 +2,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * Class that does sorting, finds positions, biggest/smallest number, average and sum
+ *
  * @author Erkan Kamber
  */
 
@@ -11,14 +13,21 @@ public class PublicAdministration {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Колко числа ще въведете ?");
-        int arraySize = Integer.parseInt(scanner.nextLine());
-
-        int[] mainArray = new int[arraySize];
+        int numbers = Integer.parseInt(scanner.nextLine());
 
         int chosenOption;
         int takenNumCounter = 1;
 
         boolean willYouUseProgram = true;
+
+        if (numbers <= 0) {
+
+            System.out.printf("Броят на числата не може да бъде %d", numbers);
+
+        } else {
+
+            int arraySize = numbers;
+            int[] mainArray = new int[arraySize];
 
             System.out.println("Числата трябва да са между 0 и 100");
 
@@ -29,31 +38,34 @@ public class PublicAdministration {
                 mainArray[i] = Integer.parseInt(scanner.nextLine());
 
                 if (mainArray[i] > 0 && mainArray[i] < 100) {
+
                     i++;
                     takenNumCounter++;
+
                 } else {
+
                     System.out.println("Числото НЕ е между 0 и 100");
                 }
             }
 
             optionDisplayer();
 
-            chosenOption = chosenOption();
+            chosenOption = chosenOption(scanner);
 
             while (willYouUseProgram) {
 
                 if (chosenOption == 1) {
 
-                    ascendingAndDescendingSort(arraySize, mainArray, chosenOption);
+                    ascendingSort(arraySize, mainArray);
                 } else if (chosenOption == 2) {
 
-                    ascendingAndDescendingSort(arraySize, mainArray, chosenOption);
+                    descendingSort(arraySize, mainArray);
                 } else if (chosenOption == 3) {
 
-                    findThePositionOfNum(arraySize, mainArray);
+                    findThePositionOfNum(arraySize, mainArray, scanner);
                 } else if (chosenOption == 4) {
 
-                    arrayScramble(arraySize, mainArray);
+                    arrayScrambler(arraySize, mainArray);
                 } else if (chosenOption == 5) {
 
                     sumAndAverageCalculator(arraySize, mainArray, chosenOption);
@@ -79,30 +91,31 @@ public class PublicAdministration {
                     break;
                 }
 
-                willYouUseProgram = willYouWorkMore(willYouUseProgram);
+                willYouUseProgram = willYouWorkMore(willYouUseProgram,scanner);
 
                 if (willYouUseProgram) {
 
                     optionDisplayer();
 
-                    chosenOption = chosenOption();
+                    chosenOption = chosenOption(scanner);
                 }
             }
             System.out.println("Вие затворихте програмата");
+        }
     }
 
     /**
-     * Method that does Ascending and Descending sorting
+     * Method that does Ascending sorting
      *
      * @param arraySize    The size of the mainArray
      * @param mainArray    The array that contains all the number, entered by the user
-     * @param chosenOption The option that the user has chose
      */
-    public static void ascendingAndDescendingSort(int arraySize, int[] mainArray, int chosenOption) {
+    public static void ascendingSort(int arraySize, int[] mainArray) {
 
         for (int i = 0; i < arraySize; i++) {
 
             for (int j = 0; j < arraySize; j++) {
+
                 if (mainArray[i] < mainArray[j]) {
 
                     int temporary = mainArray[i];
@@ -111,17 +124,32 @@ public class PublicAdministration {
                 }
             }
         }
-        if (chosenOption == 2) {
-            for (int i = arraySize - 1; i >= 0; i--) {
 
-                System.out.printf("%d, ", mainArray[i]);
-            }
-        } else {
-            for (int i = 0; i < arraySize; i++) {
+        displayEnteredNums(arraySize, mainArray);
+    }
 
-                System.out.printf("%d, ", mainArray[i]);
+    /**
+     * Method that does Descending sorting
+     *
+     * @param arraySize    The size of the mainArray
+     * @param mainArray    The array that contains all the number, entered by the user
+     */
+    public static void descendingSort(int arraySize, int[] mainArray) {
+
+        for (int i = 0; i < arraySize; i++) {
+
+            for (int j = 0; j < arraySize; j++) {
+
+                if (mainArray[i] > mainArray[j]) {
+
+                    int temporary = mainArray[i];
+                    mainArray[i] = mainArray[j];
+                    mainArray[j] = temporary;
+                }
             }
         }
+
+        displayEnteredNums(arraySize, mainArray);
     }
 
     /**
@@ -130,32 +158,24 @@ public class PublicAdministration {
      * @param arraySize The size of the mainArray
      * @param mainArray Array that contains all of the numbers, entered by the user
      */
-    public static void findThePositionOfNum(int arraySize, int[] mainArray) {
-        Scanner scanner = new Scanner(System.in);
+    public static void findThePositionOfNum(int arraySize, int[] mainArray, Scanner scanner) {
 
-        for (int i = 0; i < arraySize; i++) {
-
-            for (int j = 0; j < arraySize; j++) {
-                if (mainArray[i] < mainArray[j]) {
-
-                    int temporary = mainArray[i];
-                    mainArray[i] = mainArray[j];
-                    mainArray[j] = temporary;
-                }
-            }
-        }
+       ascendingSort(arraySize, mainArray);
 
         int positionOfSearchedNum = 0;
         int firstNumOfArray = 0;
+
         int lastNumOfArray = arraySize - 1;
+
         int middleNumOfArray = (firstNumOfArray + lastNumOfArray) / 2;
+
         int findPositionOfThisNum;
 
         boolean isNumFound = false;
 
-        System.out.println("Позицията на кое число искате да намерите ?");
+        System.out.println("\nПозицията на кое число искате да намерите ?");
 
-        findPositionOfThisNum = Integer.parseInt(scanner.nextLine());
+        findPositionOfThisNum = scanner.nextInt();
 
         while (firstNumOfArray <= lastNumOfArray) {
 
@@ -176,8 +196,10 @@ public class PublicAdministration {
             middleNumOfArray = (firstNumOfArray + lastNumOfArray) / 2;
         }
         if (isNumFound) {
+
             System.out.printf("Числото %d е в %d позиция", findPositionOfThisNum, ++positionOfSearchedNum);
         } else {
+
             System.out.printf("Числото %d не е намерено", findPositionOfThisNum);
         }
     }
@@ -188,7 +210,7 @@ public class PublicAdministration {
      * @param arraySize The size of the mainArray
      * @param mainArray The array that contains all the number, entered by the user
      */
-    public static void arrayScramble(int arraySize, int[] mainArray) {
+    public static void arrayScrambler(int arraySize, int[] mainArray) {
         Random randomNum = new Random();
 
         for (int i = 0; i < arraySize; i++) {
@@ -199,10 +221,8 @@ public class PublicAdministration {
             mainArray[randomIndexToSwap] = mainArray[i];
             mainArray[i] = temp;
         }
-        for (int i = 0; i < arraySize; i++) {
 
-            System.out.printf("%d, ", mainArray[i]);
-        }
+        displayEnteredNums(arraySize, mainArray);
     }
 
     /**
@@ -214,17 +234,20 @@ public class PublicAdministration {
     public static void sumAndAverageCalculator(int arraySize, int[] mainArray, int chosenOption) {
 
         double sumOfTheNumsInArray = 0.00;
-        double averageOfNumsInArray = 0.00;
+        double averageOfNumsInArray;
 
         for (int i = 0; i < arraySize; i++) {
 
             sumOfTheNumsInArray += mainArray[i];
         }
-        averageOfNumsInArray = sumOfTheNumsInArray / arraySize;
 
         if (chosenOption == 5) {
+
             System.out.printf("Сборът на числата е: %.0f", sumOfTheNumsInArray);
         } else {
+
+            averageOfNumsInArray = sumOfTheNumsInArray / arraySize;
+
             System.out.printf("Средно-аритметично на числата е: %.2f", averageOfNumsInArray);
         }
     }
@@ -237,14 +260,19 @@ public class PublicAdministration {
      * @param chosenOption The option that the user has chose
      */
     public static void smallestAndBiggestNumFinder(int arraySize, int[] mainArray, int chosenOption) {
+
         int biggestNumInArray = Integer.MIN_VALUE;
         int smallestNumInArray = Integer.MAX_VALUE;
 
         for (int i = 0; i < arraySize; i++) {
+
             if (mainArray[i] > biggestNumInArray) {
+
                 biggestNumInArray = mainArray[i];
             }
+
             if (mainArray[i] < smallestNumInArray) {
+
                 smallestNumInArray = mainArray[i];
             }
         }
@@ -264,27 +292,26 @@ public class PublicAdministration {
     public static void isArraySymmetrical(int arraySize, int[] mainArray) {
 
         boolean isArraySimetric = false;
-        int arraySize2 = arraySize;
 
         if (arraySize % 2 == 0) {
 
             for (int i = 0; i < arraySize; i++) {
+
                 if (mainArray[i] == mainArray[--arraySize]) {
                     isArraySimetric = true;
-                }else {
+                } else {
                     isArraySimetric = false;
+                    System.out.println("Масивът не е симетричен");
                     break;
                 }
             }
         }
         if (isArraySimetric) {
+            
             System.out.println("Масивът е симетричен");
-        } else {
-            System.out.println("Масивът не е симетричен");
         }
-        for (int i = 0; i < arraySize2; i++) {
-            System.out.printf("%d ", mainArray[i]);
-        }
+        
+        displayEnteredNums(arraySize, mainArray);
     }
 
     /**
@@ -295,9 +322,15 @@ public class PublicAdministration {
      */
     public static void reversingArray(int arraySize, int[] mainArray) {
 
-        for (int i = arraySize - 1; i >= 0; i--) {
+        int[] array2 = new int[arraySize];
+        int j = arraySize;
 
-            System.out.printf("%d, ", mainArray[i]);
+        for (int i = 0; i < arraySize; i++) {
+            array2[j - 1] = mainArray[i];
+            j = j - 1;
+        }
+        for (int k = 0; k < arraySize; k++) {
+            System.out.printf("%d, ", array2[k]);
         }
     }
 
@@ -321,10 +354,10 @@ public class PublicAdministration {
      * @param willYouUseProgram boolean checks if he wants to close the program
      * @return returns customers decision about turning off
      */
-    public static boolean willYouWorkMore(boolean willYouUseProgram) {
-        Scanner scanner = new Scanner(System.in);
+    public static boolean willYouWorkMore(boolean willYouUseProgram, Scanner scanner) {
 
         System.out.println("\nЖелаете ли да затворите програмата?");
+
         System.out.println("Да или Не");
 
         String answer = scanner.nextLine();
@@ -359,14 +392,10 @@ public class PublicAdministration {
      *
      * @return Returns the No[number] of chosen option
      */
-    public static int chosenOption() {
-
-        Scanner scanner = new Scanner(System.in);
+    public static int chosenOption(Scanner scanner) {
 
         System.out.println("\nКоя опция желаете да използвате ?");
 
-        int numOfChosenOption = Integer.parseInt(scanner.nextLine());
-
-        return numOfChosenOption;
+        return Integer.parseInt(scanner.nextLine());
     }
 }

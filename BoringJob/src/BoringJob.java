@@ -54,7 +54,7 @@ public class BoringJob {
 
             } else {
 
-                System.out.println("There is no mother with that kid's name!");
+                System.out.println("There is not mother with that kid's name!");
             }
 
         } else if (input.contains("SEX")) {
@@ -116,7 +116,7 @@ public class BoringJob {
 
                 System.out.println(name);
 
-            } else System.out.println("nqma takuv");
+            } else System.out.println("No such person");
         }
     }
 
@@ -297,9 +297,9 @@ public class BoringJob {
 
                 int age = Integer.parseInt(matcher.group(3));
 
-                System.out.print("Kid's name: " + firstName + " " + lastName + " | ");
+                System.out.print(" | Kid's name: " + firstName + " " + lastName + " | ");
 
-                System.out.println("Kid's age: " + age);
+                System.out.println(" | Kid's age: " + age);
             }
         }
     }
@@ -323,7 +323,7 @@ public class BoringJob {
 
             int salary = Integer.parseInt(matcher.group(1));
 
-            System.out.println("Worker's salary: " + salary);
+            System.out.println(" | Worker's salary: " + salary);
         }
     }
 
@@ -346,7 +346,7 @@ public class BoringJob {
 
             int pension = Integer.parseInt(matcher.group(1));
 
-            System.out.println("Pension: " + pension);
+            System.out.println(" | Pension: " + pension);
         }
     }
 
